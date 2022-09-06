@@ -1,4 +1,4 @@
-package br.com.alura.mvc.mudi.config;
+package br.com.alura.mvc.mudi.security;
 
 import java.util.HashSet;
 import java.util.Set;

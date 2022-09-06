@@ -1,4 +1,4 @@
-package br.com.alura.mvc.mudi.config;
+package br.com.alura.mvc.mudi.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -29,9 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 			.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers(HttpMethod.POST, "/login").permitAll()
-			.antMatchers("/home").hasAnyRole("USERS", "ADMINS")
-			.antMatchers("/pedidos").hasAnyRole("USERS", "ADMINS")
-			.antMatchers("/pedido/formulario").hasAnyRole("ADMINS")
+			.antMatchers(HttpMethod.GET, "/home").hasAnyRole("USERS", "ADMINS")
+			.antMatchers(HttpMethod.GET, "/home/{status}").hasAnyRole("USERS", "ADMINS")
+			.antMatchers(HttpMethod.GET, "/pedidos").hasAnyRole("USERS", "ADMINS")
+			.antMatchers(HttpMethod.POST, "/pedido/formulario").hasAnyRole("ADMINS")
 			.antMatchers(HttpMethod.POST, "/pedido/novo").hasAnyRole("ADMINS")
 			.anyRequest().authenticated().and().formLogin(form -> form
 					.loginPage("/login")
